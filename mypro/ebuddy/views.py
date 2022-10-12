@@ -21,3 +21,6 @@ def makeList(req):
     mine=documents.Event.objects.all()
     for x in mine:print(x)
     return HttpResponse("Event has listed")
+
+def makePage(req):
+    return render(req,'begin.html')
