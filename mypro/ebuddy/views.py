@@ -11,11 +11,24 @@ client=connect(host="mongodb+srv://razak:mohamed@cluster0.ptmlylq.mongodb.net/?r
 # Create your views here.
 
 def makeCreate(req):
-    eve=documents.Event()
-    eve.initiate(input("Event name please "),datetime.fromisoformat(input("event date YYYY-MM-DD")),input("Event organising department "))
-    #eve.initiate("Picconet11",datetime.fromisoformat("2022-12-20"),"CSE")
-    eve.save()
-    return HttpResponse('Event has added')
+    if req.method=="POST":
+        #print("POST accepted")
+        nm=req.POST['evename']
+        dt=req.POST['evedate']
+        dp=req.POST['evedept']
+        #print(nm,dt,dp)
+        eve=documents.Event()
+        eve.initiate(nm,datetime.fromisoformat(dt),dp)
+        #eve.initiate("Picconet11",datetime.fromisoformat("2022-12-20"),"CSE")
+        eve.save()
+        return render(req,'schedule.html',{"info":nm+" has scheduled"})
+    else:
+        return render(req,'schedule.html')
+    # eve=documents.Event()
+    # eve.initiate(input("Event name please "),datetime.fromisoformat(input("event date YYYY-MM-DD")),input("Event organising department "))
+    # #eve.initiate("Picconet11",datetime.fromisoformat("2022-12-20"),"CSE")
+    # eve.save()
+    # return HttpResponse('Event has added')
 
 def makeList(req):
     mine=documents.Event.objects.all()
