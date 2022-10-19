@@ -1,7 +1,7 @@
 {%extends 'home.html' %}
 {%block mohan%}
     <div class="table-responsive">
-        <table border="10px" cellspacing="5%" cellpadding="5%" class="table table-striped text-center">
+        <table border="10px" cellspacing="5%" cellpadding="5%" class="table table-striped text-nowrap text-center">
             <thead class="text-info">
                 <tr>
                     <th>Event Id</th>
@@ -24,7 +24,11 @@
                             <td>{{x.eveName}}</td>
                             <td>{{x.eveDate}}</td>
                             <td>{{x.eveDepartment}}</td>
-                            <td>{{x.eveParticipants}}</td>
+                            <td>
+                                <a href="/buddy/person/{{x.eveId}}" class="text-decoration-none link-warning">
+                                    {{x.eveParticipants|length}}
+                                </a>
+                            </td>
                             <td>{{x.eveWinner}}</td>
                         </tr>
                     {%endfor%}
