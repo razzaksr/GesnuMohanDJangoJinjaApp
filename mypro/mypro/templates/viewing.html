@@ -25,9 +25,13 @@
                             <td>{{x.eveDate}}</td>
                             <td>{{x.eveDepartment}}</td>
                             <td>
-                                <a href="/buddy/person/{{x.eveId}}" class="text-decoration-none link-warning">
+                                {% if x.eveWinner%}
                                     {{x.eveParticipants|length}}
-                                </a>
+                                {%else%}
+                                    <a href="/buddy/person/{{x.eveId}}" class="text-decoration-none link-warning">
+                                        {{x.eveParticipants|length}}
+                                    </a>
+                                {%endif%}
                             </td>
                             <td>{{x.eveWinner}}</td>
                         </tr>

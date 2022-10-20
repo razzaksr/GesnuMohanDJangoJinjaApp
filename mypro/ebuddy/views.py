@@ -10,6 +10,14 @@ client=connect(host="mongodb+srv://razak:mohamed@cluster0.ptmlylq.mongodb.net/?r
                db="poc",username="razak",password="mohamed",tlsCAFile=myCert)
 # Create your views here.
 
+def makeAnnounce(req,key,name):
+    documents.Event.objects(eveId=key).update_one(set__eveWinner=name)
+    return redirect("/buddy/")
+
+def makeRemove(req,key,name):
+    documents.Event.objects(eveId=key).update_one(pull__eveParticipants=name)
+    return redirect("/buddy/")
+
 def makeAddParts(req,pos):
     if req.method=="POST":
         eid=req.POST['eveid']
