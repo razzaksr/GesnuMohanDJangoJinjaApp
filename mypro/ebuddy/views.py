@@ -10,6 +10,18 @@ client=connect(host="mongodb+srv://razak:mohamed@cluster0.ptmlylq.mongodb.net/?r
                db="poc",username="razak",password="mohamed",tlsCAFile=myCert)
 # Create your views here.
 
+def makeShort(req):
+    if req.method=="POST":
+        first=req.POST['dept']
+        second=req.POST['date']
+        if first=="Select Department":
+            objs=documents.Event.objects(eveDate=second)
+        else:
+            objs=documents.Event.objects(eveDepartment=first)
+        return render(req,'viewing.html',{"everything":objs})
+    else:
+        return render(req,'short.html')
+
 def makeAnnounce(req,key,name):
     documents.Event.objects(eveId=key).update_one(set__eveWinner=name)
     return redirect("/buddy/")
